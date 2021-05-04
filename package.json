@@ -1,0 +1,44 @@
+{
+  "name": "ring-timelapse",
+  "version": "1.0.1",
+  "description": "Ring Timelapse Generator",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "build-container-snapshot": "docker build . --pull --build-arg command=snapshot --tag developedsoftware/ring-timelapse:snapshot",
+    "build-container-timelapse": "docker build . --pull --build-arg command=timelapse --tag developedsoftware/ring-timelapse:timelapse",
+    "build-container-token": "docker build . --pull --build-arg command=token --tag developedsoftware/ring-timelapse:token",    
+    "snapshot": "node dist/snapshot",
+    "timelapse": "node dist/timelapse",
+    "token": "node dist/token"
+  },
+  "author": "Luke English",
+  "maintainers": [
+    {
+      "name": "Luke English",
+      "email": "luke@developedsoftware.com",
+      "url": "https://developedsoftware.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/developedsoftware/ring-timelapse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/developedsoftware/ring-timelapse/issues"
+  },
+  "homepage": "https://github.com/developedsoftware/ring-timelapse",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.17",
+    "@types/lodash": "^4.14.168",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "fluent-ffmpeg": "^2.1.2",
+    "lodash": "^4.17.21",
+    "ring-client-api": "^11.2.1"
+  }
+}
