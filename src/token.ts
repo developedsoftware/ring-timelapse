@@ -6,7 +6,7 @@ const rest_client_1 = require("../node_modules/ring-client-api/lib/api/rest-clie
 const util_1 = require("../node_modules/ring-client-api/lib/api/");
 const fs = require('fs');
 async function acquireRefreshToken() {
-    const email = await (void 0, util_1.requestInput)('Email: '), password = await (void 0, util_1.requestInput)('Password: '), restClient = new rest_client_1.RingRestClient({ email, password }), getAuthWith2fa = async () : any => {
+    const email = await (void 0, util_1.requestInput)('Email: '), password = await (void 0, util_1.requestInput)('Password: '), restClient = new rest_client_1.RingRestClient({ email, password }), getAuthWith2fa = async () : void => {
         const code = await (void 0, util_1.requestInput)('2FA Code: ');
         try {
             return await restClient.getAuth(code);
@@ -15,7 +15,7 @@ async function acquireRefreshToken() {
             console.log('Incorrect code. Please try again.');
             return getAuthWith2fa();
         }
-    }, auth = await restClient.getCurrentAuth().catch((e) => {
+    }, auth = await restClient.getCurrentAuth().catch((e:any) => {
         if (restClient.promptFor2fa) {
             console.log(restClient.promptFor2fa);
             return getAuthWith2fa();
