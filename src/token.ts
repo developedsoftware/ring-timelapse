@@ -2,8 +2,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.logRefreshToken = exports.acquireRefreshToken = void 0;
-const rest_client_1 = require("../node_modules/ring-client-api/lib/api/rest-client");
-const util_1 = require("../node_modules/ring-client-api/lib/api/util");
+const rest_client_1 = require("../node_modules/ring-client-api/lib/rest-client");
+const util_1 = require("../node_modules/ring-client-api/lib/util");
 const fs = require('fs');
 async function acquireRefreshToken() {
     const email = await (void 0, util_1.requestInput)('Email: '), password = await (void 0, util_1.requestInput)('Password: '), restClient = new rest_client_1.RingRestClient({ email, password }), getAuthWith2fa = async () : Promise<any> => {
