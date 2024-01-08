@@ -7,7 +7,7 @@
     "clean": "rimraf dist",
     "build-container-snapshot": "docker build . --pull --build-arg command=snapshot --tag developedsoftware/ring-timelapse:snapshot",
     "build-container-timelapse": "docker build . --pull --build-arg command=timelapse --tag developedsoftware/ring-timelapse:timelapse",
-    "build-container-token": "docker build . --pull --build-arg command=token --tag developedsoftware/ring-timelapse:token",    
+    "build-container-token": "docker build . --pull --build-arg command=token --tag developedsoftware/ring-timelapse:token",
     "snapshot": "node dist/snapshot",
     "timelapse": "node dist/timelapse",
     "token": "node dist/token"
@@ -39,6 +39,6 @@
     "dotenv": "^16.0.2",
     "fluent-ffmpeg": "^2.1.2",
     "lodash": "^4.17.21",
-    "ring-client-api": "^11.2.1"
+    "ring-client-api": "^11.8.1"
   }
 }
