@@ -33,8 +33,12 @@ async function snapshot() {
     
     ringApi.onRefreshTokenUpdated.subscribe(
         async ({ newRefreshToken, oldRefreshToken }) => {
-            await writeFileSync(path.resolve(__dirname, "target", ".token"), newRefreshToken);
-            await writeFileSync(path.resolve(__dirname, "target", ".token.old"), oldRefreshToken);
+            if (newRefreshToken) {
+                await writeFileSync(path.resolve(__dirname, "target", ".token"), newRefreshToken);
+            }
+            if (oldRefreshToken) {
+                await writeFileSync(path.resolve(__dirname, "target", ".token.old"), oldRefreshToken);
+            }
         }
     );
 
