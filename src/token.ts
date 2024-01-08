@@ -28,7 +28,6 @@ exports.acquireRefreshToken = acquireRefreshToken;
 (async() => {
     const refreshToken = await acquireRefreshToken();
     try {
-        fs.ensureFileSync('/app/dist/target/.token');
         fs.writeFileSync('/app/dist/target/.token', refreshToken);
         console.log('\nSuccessfully generated a refresh token. You can now run ring-timelapse:snapshot\n');
     } catch (err) {
