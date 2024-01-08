@@ -1,4 +1,4 @@
-import { writeFileSync, mkdirSync, existsSync } from 'fs';
+import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'fs';
 import { RingApi } from 'ring-client-api'
 import * as path from 'path'
 import * as dotenv from "dotenv";
@@ -16,11 +16,18 @@ async function snapshot() {
         log(' - no internet connection');
         return false;
     }
-    
-    let systemId = (process.env.token as string).slice(0,32);
+
+    if (!existsSync(path.resolve(__dirname, "target", ".token"))) {
+        log(' - please generate a ring token using ring-timelapse:token');
+        return false;
+    }
+
+    let token = readFileSync(path.resolve(__dirname, "target", ".token"), "utf8");
+
+    let systemId = (token as string).slice(0,32);
     
     const ringApi = new RingApi({
-        refreshToken: process.env.token as string,
+        refreshToken: token as string,
         systemId: systemId as string,
         controlCenterDisplayName: 'ring-timelapse',
         debug: false
@@ -28,7 +35,7 @@ async function snapshot() {
     
     ringApi.onRefreshTokenUpdated.subscribe(
         async ({ newRefreshToken, oldRefreshToken }) => {
-          process.env.token = newRefreshToken;
+            return writeFileSync(path.resolve(__dirname, "target", ".token"), newRefreshToken);
         }
     );
 

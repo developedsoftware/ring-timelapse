@@ -18,7 +18,6 @@ RUN apk add  --no-cache ffmpeg
 ARG command=snapshot
 
 ENV command=$command
-ENV token=$token
 
 WORKDIR /app
 
