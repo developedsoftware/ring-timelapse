@@ -10,7 +10,7 @@ RUN npm install
 # build
 RUN npm run build
 
-FROM node:current-alpine
+FROM node:20.10-alpine
 
 # add ffmpeg
 RUN apk add  --no-cache ffmpeg
