@@ -23,19 +23,18 @@ async function snapshot() {
     }
 
     let token = readFileSync(path.resolve(__dirname, "target", ".token"), "utf8");
-
-    let systemId = (token as string).slice(0,32);
     
     const ringApi = new RingApi({
         refreshToken: token as string,
-        systemId: systemId as string,
+        systemId: 'ring-timelapse',
         controlCenterDisplayName: 'ring-timelapse',
         debug: false
     });
     
     ringApi.onRefreshTokenUpdated.subscribe(
         async ({ newRefreshToken, oldRefreshToken }) => {
-            return writeFileSync(path.resolve(__dirname, "target", ".token"), newRefreshToken);
+            await writeFileSync(path.resolve(__dirname, "target", ".token"), newRefreshToken);
+            await writeFileSync(path.resolve(__dirname, "target", ".token.old"), oldRefreshToken);
         }
     );
 
